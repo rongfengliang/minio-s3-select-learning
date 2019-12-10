@@ -1,0 +1,7 @@
+data
+index.html
+venv
+.vscode
+__pycache__
+select.pyc
+.python-version

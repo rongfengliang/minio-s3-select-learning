@@ -1,0 +1,30 @@
+import boto3
+s3 = boto3.client('s3',
+                  endpoint_url='http://localhost:9000',
+                  aws_access_key_id='dalongapp',
+                  aws_secret_access_key='dalongapp',
+                  region_name='us-east-1')
+
+r = s3.select_object_content(
+    Bucket='demoapp',
+    Key='demo.json',
+    ExpressionType='SQL',
+    Expression="SELECT d.dir_name, d.files FROM S3Object[*] d",
+    InputSerialization={
+        'CompressionType': 'NONE',
+        'JSON': {
+            'Type': 'DOCUMENT'
+        }
+    },
+    OutputSerialization={'JSON': {}},
+)
+for event in r['Payload']:
+    if 'Records' in event:
+        records = event['Records']['Payload'].decode('utf-8')
+        print(records)
+    elif 'Stats' in event:
+        statsDetails = event['Stats']['Details']
+        print("Stats details bytesScanned: ")
+        print(statsDetails['BytesScanned'])
+        print("Stats details bytesProcessed: ")
+        print(statsDetails['BytesProcessed'])

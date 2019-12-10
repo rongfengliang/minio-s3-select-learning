@@ -1,0 +1,19 @@
+{
+    "created": "936864000",
+    "dir_name": "important_docs",
+    "files": [
+        {
+            "name": "."
+        },
+        {
+            "name": ".."
+        },
+        {
+            "name": ".aws"
+        },
+        {
+            "name": "downloads"
+        }
+    ],
+    "owner": "AWS S3"
+}
